@@ -1,0 +1,66 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  AppShell,
+  Divider,
+  Flex,
+  ScrollArea,
+  Text,
+  Stack,
+  NavLink,
+  ActionIcon,
+} from "@mantine/core";
+import { Icon } from "@iconify/react";
+
+import ThemeSwitcher from "./ThemeSwitcher";
+import pages from "#a/res/pages.json";
+import { useMediaQuery } from "@mantine/hooks";
+
+type NavBarProps = {
+  menu: React.ReactNode;
+  close: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+};
+
+const NavBar = ({ menu, close }: NavBarProps) => {
+  const pathname = usePathname();
+  const match = useMediaQuery("(max-width: 767px)");
+
+  return (
+    <>
+      <AppShell.Section hiddenFrom="sm">
+        <Flex h={60} align="center" gap={10}>
+          {menu}
+          <Text size="20px">Codjix</Text>
+        </Flex>
+        <Divider />
+      </AppShell.Section>
+      <AppShell.Section grow my="md" component={ScrollArea}>
+        <Stack gap={10}>
+          {pages.map(({ href, label, icon }, index) => (
+            <NavLink
+              key={index}
+              component={Link}
+              active={pathname == href}
+              {...{ href, label, onClick: close }}
+              style={{ borderRadius: 10 }}
+              leftSection={
+                <ActionIcon
+                  aria-label={`${label} icon`}
+                  variant="transparent"
+                  color={pathname == href ? null : "gray"}
+                  size="lg"
+                >
+                  <Icon height={25} icon={icon} />
+                </ActionIcon>
+              }
+            />
+          ))}
+        </Stack>
+      </AppShell.Section>
+      <AppShell.Section>{match && <ThemeSwitcher wide fullWidth />}</AppShell.Section>
+    </>
+  );
+};
+
+export default NavBar;
