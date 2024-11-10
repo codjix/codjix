@@ -14,11 +14,10 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Codjix",
     description: "Codjix - Ibrahim Megahed's personal website.",
     background_color: "#242424",
-    theme_color: "#f08c00",
-    orientation: "any",
+    theme_color: "#242424",
     screenshots: [
-      { src: dark.src, sizes: "2048/3956", type: "image/png" },
-      { src: light.src, sizes: "2048/3956", type: "image/png" },
+      { src: dark.src, type: "image/png", sizes: "1811x3500" },
+      { src: light.src, type: "image/png", sizes: "1811x3500", form_factor: "wide" } as any,
     ],
     icons: [
       { src: logo192.src, type: "image/png", sizes: "192x192" },

@@ -1,11 +1,12 @@
 import Head from "next/head";
 import { cookies } from "next/headers";
 import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Notifications } from "@mantine/notifications";
 
 import LayoutX from "#c/LayoutX";
+import MetaTheme from "#c/LayoutX/MetaTheme";
 import mkMetaData from "#/lib/utils/mkMetaData";
-import GTagManager from "#c/GTagManager";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "#a/styles/globals.scss";
@@ -30,13 +31,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
-        <GTagManager />
       </Head>
+      <GoogleTagManager
+        gtmId={process.env.NEXT_PUBLIC_GTAG}
+        gtmScriptUrl="https://www.googletagmanager.com/gtag/js"
+      />
       <body>
         <MantineProvider
           theme={theme}
           defaultColorScheme={(Co.get("color-scheme")?.value as any) ?? "auto"}
         >
+          <MetaTheme />
           <LayoutX wideOpen={Co.get("wide-open")?.value}>{children}</LayoutX>
           <Notifications zIndex={550} />
         </MantineProvider>

@@ -90,7 +90,7 @@ const page = () => {
               ))}
             </Flex>
             <a href="https://palestinecampaign.org/" target="_blank">
-              <Image mt={10} h={20 * 1.5} w={155 * 1.5} src={palestine.src} />
+              <Image mt={10} h={20 * 1.5} w={155 * 1.5} alt="Free Palestine" src={palestine.src} />
             </a>
           </Stack>
         </div>
