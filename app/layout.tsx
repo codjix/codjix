@@ -32,6 +32,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </Head>
+      <meta name="google-adsense-account" content="ca-pub-2060833228835984" />
       <GoogleTagManager
         gtmId={process.env.NEXT_PUBLIC_GTAG}
         gtmScriptUrl="https://www.googletagmanager.com/gtag/js"
