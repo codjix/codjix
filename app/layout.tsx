@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Notifications } from "@mantine/notifications";
+import { Analytics } from "@vercel/analytics/react";
 
 import LayoutX from "#c/LayoutX";
 import MetaTheme from "#c/LayoutX/MetaTheme";
@@ -32,6 +33,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </Head>
+      <Analytics />
       <meta name="google-adsense-account" content="ca-pub-2060833228835984" />
       <GoogleTagManager
         gtmId={process.env.NEXT_PUBLIC_GTAG}
