@@ -1,6 +1,0 @@
-[
-  { "label": "Email: admin@codjix.me", "href": "mailto:admin@codjix.me", "icon": "ph:envelope-simple-duotone" },
-  { "label": "WhatsApp: +201092726914", "href": "https://wa.me/201092726914", "icon": "mdi:whatsapp" },
-  { "label": "FB Messenger: @codjix", "href": "https://m.me/codjix", "icon": "ph:messenger-logo" },
-  { "label": "Telegram: @codjix", "href": "https://t.me/codjix", "icon": "mdi:telegram" }
-]

@@ -1,49 +1,45 @@
+import { Title, Group, Text, Stack, Card, NavLink, Badge } from "@mantine/core";
 import { Icon } from "@iconify/react";
-import { Title, Group, Text, Card, Paper, Stack, NavLink, Box } from "@mantine/core";
+import { SOCIALS } from "@/features/const";
 
-import ContactForm from "./ContactForm";
-import classes from "./styles.module.scss";
-import mkMetaData from "#/lib/utils/mkMetaData";
-import banner from "#a/images/banners/contact.png";
-import waves from "#a/images/waves.svg";
-import contacts from "./contacts.json";
+import styles from "./page.module.scss";
+import waves from "@/assets/images/waves.svg";
+import { ContactForm } from "@/features/contact";
 
-export const metadata = mkMetaData({
+export const metadata = {
   title: "Contact | Codjix",
   description: "I'm looking forward to hearing from you.",
-  images: [{ url: banner.src }],
-});
+};
 
-const page = () => {
+export default function ContactPage() {
+  const badge = <Badge variant="white" h={25} children="@codjix" />;
   return (
-    <>
+    <Stack>
       <Title component={Group} order={1} my={0}>
-        <Icon icon="ph:envelope-simple-duotone" />
+        <Icon icon="tabler:mail" />
         Contact Me
       </Title>
       <Text c="dimmed" size="lg">
         I'm looking forward to hearing from you.
       </Text>
-      <Box className={classes.contactContainer}>
-        <Card className={classes.contact} withBorder shadow="sm" p={20} mt={15}>
-          <Paper className={classes.links} bg={`url(${waves.src}) no-repeat`}>
-            <h2>Contact Details :</h2>
-            <Stack>
-              {contacts.map(({ label, href, icon }, index) => (
-                <NavLink
-                  {...{ label, href }}
-                  leftSection={<Icon icon={icon} />}
-                  target="_blank"
-                  key={index}
-                />
-              ))}
-            </Stack>
-          </Paper>
-          <ContactForm />
-        </Card>
-      </Box>
-    </>
+      <Card className={styles.contact}>
+        <Stack className={styles.social} bg={`url(${waves.src}) no-repeat`}>
+          <Title order={2}>Social Media:</Title>
+          {SOCIALS.map(({ label, href, icon }, key) => (
+            <NavLink
+              key={key}
+              c="#ffffff"
+              variant="subtle"
+              {...{ label, href }}
+              leftSection={<Icon icon={icon} />}
+              rightSection={badge}
+              target="_blank"
+              active
+            />
+          ))}
+        </Stack>
+        <ContactForm />
+      </Card>
+    </Stack>
   );
-};
-
-export default page;
+}
