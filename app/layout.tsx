@@ -1,56 +1,38 @@
-import Head from "next/head";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
-import { GoogleTagManager } from "@next/third-parties/google";
-import { Notifications } from "@mantine/notifications";
 import { Analytics } from "@vercel/analytics/react";
+import type { MantineColorScheme as Scheme } from "@mantine/core";
+import { mantineHtmlProps, ColorSchemeScript } from "@mantine/core";
+import { Providers } from "@/components/Providers";
+import { Layout } from "@/components/Layout";
+import { CONFIG } from "@/features/const";
 
-import LayoutX from "#c/LayoutX";
-import MetaTheme from "#c/LayoutX/MetaTheme";
-import mkMetaData from "#/lib/utils/mkMetaData";
-import "@mantine/core/styles.css";
-import "@mantine/notifications/styles.css";
-import "#a/styles/globals.scss";
+import banner from "@/assets/images/banner.png";
 
-export const metadata = mkMetaData({
-  title: "Codjix",
-  description: "Ibrahim Megahed - Codjix personal website.",
-});
+export const metadata: Metadata = {
+  title: CONFIG.name,
+  description: CONFIG.description,
+  metadataBase: new URL(CONFIG.url),
+  openGraph: {
+    images: [{ url: banner.src, width: banner.width, height: banner.height }],
+  },
+};
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  const theme = createTheme({
-    fontFamily: "Open Sans, sans-serif",
-    primaryColor: "yellow",
-  });
-  const Co = cookies();
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookie = await cookies();
+  const scheme = (cookie.get("mantine-scheme")?.value as Scheme) ?? "auto";
 
   return (
-    <html lang="en">
-      <Head>
-        <ColorSchemeScript />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-        />
-      </Head>
-      <Analytics />
-      <meta name="google-adsense-account" content="ca-pub-2060833228835984" />
-      <GoogleTagManager
-        gtmId={process.env.NEXT_PUBLIC_GTAG}
-        gtmScriptUrl="https://www.googletagmanager.com/gtag/js"
-      />
+    <html lang="en" {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript defaultColorScheme={scheme} />
+        <Analytics />
+      </head>
       <body>
-        <MantineProvider
-          theme={theme}
-          defaultColorScheme={(Co.get("color-scheme")?.value as any) ?? "auto"}
-        >
-          <MetaTheme />
-          <LayoutX wideOpen={Co.get("wide-open")?.value}>{children}</LayoutX>
-          <Notifications zIndex={550} />
-        </MantineProvider>
+        <Providers scheme={scheme}>
+          <Layout children={children} />
+        </Providers>
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}

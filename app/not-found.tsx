@@ -1,35 +1,26 @@
 import Link from "next/link";
-import { Button, Flex, Group, Stack, Text, Title } from "@mantine/core";
+import { Button, Group, Stack, Text, Title } from "@mantine/core";
 
-import ScreenBox from "#c/ScreenBox";
-import BackBtn from "#c/BackBtn";
-import mkMetaData from "#/lib/utils/mkMetaData";
-
-export const metadata = mkMetaData({
-  title: "Not Found | Next App",
-  description: "Sorry, couldn't find the page you're looking for.",
-});
-
-const NotFound = () => {
-  return (
-    <ScreenBox component={Flex} align="center" justify="center">
-      <Stack gap={10} ta="center">
-        <Title c="yellow" order={6}>
-          404
-        </Title>
-        <Title order={2} my={0}>
-          Not Found
-        </Title>
-        <Text c="dimmed">Sorry, couldn't find the page you're looking for.</Text>
-        <Group justify="center">
-          <Button w={100} component={Link} href="/">
-            Go Home
-          </Button>
-          <BackBtn w={100} />
-        </Group>
-      </Stack>
-    </ScreenBox>
-  );
+export const metadata = {
+  title: "Not Found | Codjix",
 };
 
-export default NotFound;
+export default function NotFound() {
+  return (
+    <Stack gap={20} align="center" h="calc(100vh - 130px - 130px)" justify="center">
+      <Text c="green">404</Text>
+      <Title order={2}>Not Found</Title>
+      <Text c="dimmed">
+        Sorry, couldn't find the page you're looking for. It might be deleted or moved to another URL.
+      </Text>
+      <Group justify="center">
+        <Button w={100} component={Link} href="/">
+          Go Home
+        </Button>
+        <Button w={100} component={Link} href="/contact">
+          Get Help
+        </Button>
+      </Group>
+    </Stack>
+  );
+}
