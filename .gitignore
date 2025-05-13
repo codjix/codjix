@@ -14,7 +14,7 @@ out
 
 # lock files
 package-lock.json
-bun.lockb
+bun.lock*
 pnpm-lock.yaml
 yarn.lock
 
