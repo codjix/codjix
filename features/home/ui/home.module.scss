@@ -1,0 +1,12 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  gap: 5px;
+  &:hover {
+    border-width: 2px;
+    border-color: var(--mantine-primary-color-filled);
+  }
+}
