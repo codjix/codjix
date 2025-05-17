@@ -6,7 +6,7 @@ As a full-stack React software engineer. I use **Node.js**, **React**, **Next.js
 
 ### Let's Connect
 
-[Website](https://codjix.me), [LinkedIn](https://linkedin.com/in/codjix), [Email](mail:admin@codjix.me).
+[Website](https://codjix.me), [LinkedIn](https://linkedin.com/in/codjix), [Email](mailto:admin@codjix.me).
 
 ---
 
